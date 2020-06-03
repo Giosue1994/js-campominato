@@ -28,11 +28,51 @@ function nRandom16(bomb) {
   return bomb;
 }
 
+// VARIABILI
+var listaBombe;
+var numeroUtente;
+var listaNumeriUtente = [];
+var message;
+
+var bomba = false;
+
 // genero 16 numeri casuali tra 1 e 100
-var bomb = nRandom16(bomb);
-console.log(bomb);
+listaBombe = nRandom16(listaBombe);
+console.log(listaBombe);
+
 
 // chiedo all'utente di inserire un numero compreso tra 1 e 100
-var numeroUtente = parseInt(prompt('Inserisci un numero'));
+while (bomba === false && listaNumeriUtente.length < 84) {
+  numeroUtente = parseInt(prompt('Inserisci un numero'));
 
-console.log(numeroUtente);
+  // verifico se l'elemento inserito dall'utente è già presnte nella lista
+  for (var j = 0; j < listaNumeriUtente.length; j++) {
+    if (numeroUtente === listaNumeriUtente[j]) {
+      alert('Numero già inserito');
+      bomba = true;
+      message = 'HAI PERSO';
+      console.log(message);
+    }
+  }
+  
+  // inserisco i numeri dichiarati dall'utente in una lista
+  listaNumeriUtente.push(numeroUtente);
+  console.log('lista dei numeri inseriti dall\'utente ', listaNumeriUtente);
+
+
+  // verifico che l'elemento non sia nella lista
+  for (var i = 0; i < listaBombe.length; i++) {
+    if (numeroUtente === listaBombe[i]) {
+      alert('BOOM!')
+      bomba = true;
+      message = 'HAI PERSO!';
+      console.log(message);
+    }
+  }
+
+  // se non viene trovata nessuna bomba l'utente ha vinto
+  if (listaNumeriUtente.length == 84) {
+    message = 'HAI VINTO!';
+    console.log(message);
+  }
+}
